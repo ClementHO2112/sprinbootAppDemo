@@ -1,0 +1,17 @@
+[
+    {
+        "httpRequest": {
+            "path": "/employee",
+            "queryStringParameters" : {
+                "username" : [ "Chris1225" ]
+              }
+        },
+        "httpResponse": {
+            "body": {
+                "userName": "Chris1225",
+                "password": "$2a$10$ZVq8nSSj09fRvYfcFgy3Su6Hg6lGWz466i/Y/lolG.v/6ph.BYsH2",
+                "roles": ["A", "B"]
+            }
+        }
+    }
+]
