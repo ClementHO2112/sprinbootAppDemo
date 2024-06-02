@@ -11,7 +11,7 @@ import org.springframework.web.client.RestTemplate;
 public class UserDaoImpl implements UserDao{
     @Override
     public User findByUserName(String userName) {
-        final String uri = "http://localhost:1090/employee?username=" + userName;
+        final String uri = "http://mockserver:1080/employee?username=" + userName;
 
         RestTemplate restTemplate = new RestTemplate();
 

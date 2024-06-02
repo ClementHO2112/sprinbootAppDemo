@@ -1,0 +1,37 @@
+version: "3"
+services:
+  springboot:
+    image: springbootdemo
+    build: ./demo
+    ports: 
+      - 8081:8080
+    depends_on:
+      - db
+      - mockserver
+    stdin_open: true
+    tty: true
+
+  db:
+    image: mysql
+    volumes:
+      - mysql_data:/var/lib/mysql
+    expose:
+      - 3306
+    ports:
+      - 3307:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: '1qa2ws'
+
+  mockserver:
+    image: mockserver/mockserver 
+    expose:
+      - 1080
+    ports:
+      - 1090:1080
+    volumes:
+      - /mnt/d/dockerPratice/springboot/mockserverConfig:/config
+    environment:
+       MOCKSERVER_WATCH_INITIALIZATION_JSON: 'true'
+       MOCKSERVER_INITIALIZATION_JSON_PATH: '/config/initializerJson.json'
+volumes:
+  mysql_data :
