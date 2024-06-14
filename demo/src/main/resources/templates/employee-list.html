@@ -42,7 +42,7 @@
                 <td th:text="${tempEmployee.email}" />
 
                 <td style="text-align: center;">
-                    <a th:href="@{/employees/editEmp(empId=${tempEmployee.id})}" type="button" class="btn btn-info btn-sm">Edit User</a>
+                    <a th:href="@{/employees/editEmp(empId=${tempEmployee.id})}" type="button" class="btn btn-info btn-sm">Edit Employee</a>
                     <a th:href="@{/employees/delete(empId=${tempEmployee.id})}"
                        th:onclick="return deleteEmpConfirm([[${tempEmployee.id}]], [[${tempEmployee.firstName}]] + ' ' + [[${tempEmployee.lastName}]] )"
                        type="button" class="btn btn-danger btn-sm">Delete</a>
