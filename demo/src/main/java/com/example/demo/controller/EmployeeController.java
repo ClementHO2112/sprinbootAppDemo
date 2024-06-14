@@ -5,10 +5,7 @@ import com.example.demo.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.Mapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -33,5 +30,43 @@ public class EmployeeController {
         theModel.addAttribute("employees", employees);
 
         return "employee-list";
+    }
+
+    @GetMapping("/addEmp")
+    public String addEmployees(Model theModel) {
+
+        // get the employees from db
+        Employee emp = new Employee();
+
+        // add to the spring model
+        theModel.addAttribute("employee", emp);
+        theModel.addAttribute("title", "Add Employee");
+
+        return "edit";
+    }
+
+    @GetMapping("/editEmp")
+    public String editEmployees(@RequestParam("empId") int empId, Model theModel) {
+
+        // get the employees from db
+        Employee emp = employeeService.findById(empId);
+
+        // add to the spring model
+        theModel.addAttribute("employee", emp);
+        theModel.addAttribute("title", "Edit Employee");
+
+        return "edit";
+    }
+
+    @PostMapping("/save")
+    public String saveEmployee(@ModelAttribute("employee") Employee emp){
+        employeeService.save(emp);
+        return "redirect:/employees/list";
+    }
+
+    @GetMapping("/delete")
+    public String deleteEmployee(@RequestParam("empId") int empId, Model theModel){
+        employeeService.delete(empId);
+        return "redirect:/employees/list";
     }
 }

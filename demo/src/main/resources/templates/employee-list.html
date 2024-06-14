@@ -3,7 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="jquery-3.7.1.slim.min.js"></script>
     <title>Employee list</title>
+
+    <script>
+        function deleteEmpConfirm (empId, empName){
+            if(! confirm("Are you sure you want to delete : \n ID : " + empId + " \n NAME : " + empName + "?")){
+                return false;
+            }
+        }
+
+
+    </script>
 </head>
 <body>
     <div class="container">
@@ -11,21 +22,31 @@
         <h3>Employee Directory</h3>
         <hr>
 
+        <a th:href="@{/employees/addEmp}"
+            class="btn btn-primary btn-sm mb-3">Add Employee</a>
+
         <table class="table table-bordered table-striped">
             <thead class="table-dark">
             <tr>
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Email</th>
+                <th></th>
             </tr>
             </thead>
 
             <tbody>
             <tr th:each="tempEmployee : ${employees}">
-
                 <td th:text="${tempEmployee.firstName}" />
                 <td th:text="${tempEmployee.lastName}" />
                 <td th:text="${tempEmployee.email}" />
+
+                <td style="text-align: center;">
+                    <a th:href="@{/employees/editEmp(empId=${tempEmployee.id})}" type="button" class="btn btn-info btn-sm">Edit User</a>
+                    <a th:href="@{/employees/delete(empId=${tempEmployee.id})}"
+                       th:onclick="return deleteEmpConfirm([[${tempEmployee.id}]], [[${tempEmployee.firstName}]] + ' ' + [[${tempEmployee.lastName}]] )"
+                       type="button" class="btn btn-danger btn-sm">Delete</a>
+                </td>
 
             </tr>
             </tbody>
