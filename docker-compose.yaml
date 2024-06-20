@@ -10,6 +10,8 @@ services:
       - mockserver
     stdin_open: true
     tty: true
+    volumes:
+      - /mnt/d/logs:/var/logs
 
   db:
     image: mysql
@@ -23,13 +25,12 @@ services:
       MYSQL_ROOT_PASSWORD: '1qa2ws'
 
   mockserver:
-    image: mockserver/mockserver 
+    image: mockserver/mockserver
+    build: ./mockserver
     expose:
       - 1080
     ports:
       - 1090:1080
-    volumes:
-      - /mnt/d/dockerPratice/springboot/mockserverConfig:/config
     environment:
        MOCKSERVER_WATCH_INITIALIZATION_JSON: 'true'
        MOCKSERVER_INITIALIZATION_JSON_PATH: '/config/initializerJson.json'
