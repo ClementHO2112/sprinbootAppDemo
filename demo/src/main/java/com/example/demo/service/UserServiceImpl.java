@@ -22,11 +22,11 @@ public class UserServiceImpl implements UserService{
     public UserServiceImpl(UserDao userDao) {
         this.userDao = userDao;
     }
-    @Override
-    public User findByUserName(String userName) {
-        // check the database if the user already exists
-        return userDao.findByUserName(userName);
-    }
+//    @Override
+//    public User findByUserName(String userName) {
+//        // check the database if the user already exists
+//        return userDao.findByUserName(userName);
+//    }
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         User user = userDao.findByUserName(userName);
