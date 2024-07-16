@@ -1,16 +1,18 @@
+version: "3"
 services:
   springboot:
-    image: springbootdemo
+    image: clement2112/springbootdemo
     build: ./demo
     ports: 
       - 8081:8080
     depends_on:
       - db
       - mockserver
+      - redis
     stdin_open: true
     tty: true
     volumes:
-      - /mnt/d/logs:/var/logs
+      - springbootlogs:/var/logs
 
   db:
     image: mysql
@@ -24,7 +26,7 @@ services:
       MYSQL_ROOT_PASSWORD: '1qa2ws'
 
   mockserver:
-    image: mockserver/mockserver
+    image: clement2112/mockserver
     build: ./mockserver
     expose:
       - 1080
@@ -53,3 +55,4 @@ volumes:
   mysql_data :
   redisinsight:
   redis_data:
+  springBootLogs:
